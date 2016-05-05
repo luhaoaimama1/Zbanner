@@ -7,6 +7,7 @@ import com.zone.zbanner.viewpager.ViewPagerCompat;
 
 // Mainly used for banner pages and boot boot page
 public class ViewPagerCircle extends ViewPagerCompat {
+	private final Context context;
 	private long delayMillis=3000;
 	private boolean isTimeDelay=false;
 	private int initCircle=200;
@@ -16,6 +17,7 @@ public class ViewPagerCircle extends ViewPagerCompat {
 	public ViewPagerCircle(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		handler=new Handler();
+		this.context=context;
 	}
 
 	public ViewPagerCircle(Context context) {
@@ -40,6 +42,7 @@ public class ViewPagerCircle extends ViewPagerCompat {
 		else
 			setCurrentItem(offset);
 		setOnPageChangeListener(null);
+		new FixedSpeedScroller(context).setViewPager(this);
 	}
 
 	public void nextPage() {

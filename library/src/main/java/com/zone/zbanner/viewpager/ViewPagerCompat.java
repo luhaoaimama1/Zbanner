@@ -2,6 +2,10 @@ package com.zone.zbanner.viewpager;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+
+import com.zone.zbanner.FixedSpeedScroller;
+import com.zone.zbanner.viewpage_anime.TestAnime;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -13,8 +17,9 @@ public class ViewPagerCompat extends ViewPager {
     private static final int DRAW_ORDER_DEFAULT = 0;
     private static final int DRAW_ORDER_FORWARD = 1;
     private static final int DRAW_ORDER_REVERSE = 2;
+
     public ViewPagerCompat(Context context) {
-        super(context);
+        this(context,null);
     }
 
     public ViewPagerCompat(Context context, AttributeSet attrs) {
@@ -65,6 +70,5 @@ public class ViewPagerCompat extends ViewPager {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-
     }
 }

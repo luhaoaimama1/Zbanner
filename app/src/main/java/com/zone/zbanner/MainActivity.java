@@ -63,7 +63,7 @@ public class MainActivity extends Activity {
 
         pager.setAdapter(mviewPager, 2);
         pager.setPageTransformer(true, new TestAnime());
-        new FixedSpeedScroller(this).setViewPager(pager);
+//        new FixedSpeedScroller(this).setViewPager(pager);
         indicatorView.setViewPager(pager);
         circleIndicator = new CircleIndicator(20);
         indicatorView.setIndicator(circleIndicator);

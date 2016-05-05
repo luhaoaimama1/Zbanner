@@ -13,49 +13,53 @@
         android:id="@+id/indicatorView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentBottom="false"
+        android:layout_below="@+id/pager"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="86dp"/>
+        android:layout_marginTop="20dp" />
 
     <!--android:background="#61e7ff"-->
 
-    <Button
-        android:id="@+id/bt_toggle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onClick"
-        android:text="tog_indcator" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/togCircle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/bt_toggle"
-        android:onClick="onClick"
-        android:text="togCircle" />
+        <Button
+            android:id="@+id/bt_toggle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="tog_indcatorMoveMode"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/togShape"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/bt_toggle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="onClick"
-        android:text="togShape" />
+        <Button
+            android:id="@+id/togShape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="tog_indcatorShape"
+            android:textAllCaps="false" />
 
-    <Button
-        android:id="@+id/bt_toggleTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClick"
-        android:text="tog定时轮播" />
+        <Button
+            android:id="@+id/bt_toggleTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="tog定时轮播"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/togCircle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/bt_toggle"
+            android:onClick="onClick"
+            android:text="togCircle"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
 
 </RelativeLayout>
