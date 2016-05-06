@@ -8,6 +8,20 @@
 - [x] 支持(Build.VERSION.SDK_INT < 11)的页面切换动画 并且父类是ViewPager 而不是一个新的类 
 好处就是 可以与很多支持ViewPager的框架连用
 
+# Usage
+
+### Jcenter
+gradle
+
+    compile 'com.zone:zbanner:1.0.0'
+pom.xml
+
+    <dependency>
+      <groupId>com.zone</groupId>
+      <artifactId>zbanner</artifactId>
+      <version>1.0.0</version>
+      <type>pom</type>
+    </dependency>
 # Preview
 ![](./demo/demo.png)
 
