@@ -24,9 +24,9 @@ pom.xml
     </dependency>
 # Preview
 ### incatorshape:
-![](./demo/incatorshape.gif)
+![](./demo/shape.gif)
 ### movemode:
-![](./demo/movemode.gif)
+![](./demo/move.gif)
 
 # Easy use:
 1.banner的初始化使用 PagerAdapterCycle  PagerAdapterCircle_Image则是继承PagerAdapterCycle子view仅仅是ImageView
