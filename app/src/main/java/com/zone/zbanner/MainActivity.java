@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -44,25 +45,40 @@ public class MainActivity extends Activity {
         }
         mviewPager = new PagerAdapterCircle_Image(this, list, true) {
             @Override
-            public void setImage(ImageView iv, int position) {
+            public void setImage(ImageView iv, final int position) {
 //                iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 Glide.with(MainActivity.this).load(list.get(position)).centerCrop()
                         .placeholder(R.drawable.ic_stub)
                         .error(R.drawable.ic_error).dontAnimate().into(iv);
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println("position:"+position);
+                    }
+                });
             }
         };
         mviewPagerNoCircle = new PagerAdapterCircle_Image(this, list, false) {
             @Override
-            public void setImage(ImageView iv, int position) {
+            public void setImage(final ImageView iv, final int position) {
 //                iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 Glide.with(MainActivity.this).load(list.get(position)).centerCrop()
                         .placeholder(R.drawable.ic_stub)
                         .error(R.drawable.ic_error).dontAnimate().into(iv);
+                iv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.out.println("position:"+position);
+                    }
+                });
             }
         };
 
         pager.setAdapter(mviewPager, 2);
-        pager.setPageTransformer(true, new TestAnime());
+//        pager.setPageTransformer(true, new TestAnime());
+        pager.setPageTransformer(true, null);
+        pager.setPageMargin(50);
+        pager.setOffscreenPageLimit(3);
 //        new FixedSpeedScroller(this).setViewPager(pager);
         indicatorView.setViewPager(pager);
         circleIndicator = new CircleIndicator(20);
@@ -97,18 +113,18 @@ public class MainActivity extends Activity {
 //
 //            @Override
 //            public void onPageSelected(int position) {
-////                System.out.println("position");
-////                System.out.printf("MainActivity onPageSelected====position:%d /t", position);
+//                System.out.println("position");
+//                System.out.printf("MainActivity onPageSelected====position:%d /t \n", position);
 //            }
 //
 //            @Override
 //            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-////                System.out.printf("MainActivity onPageScrolled====position:%d /tpositionOffset:%f /tpositionOffsetPixels:%d /t", position, positionOffset, positionOffsetPixels);
+//                System.out.printf("MainActivity onPageScrolled====position:%d /tpositionOffset:%f /tpositionOffsetPixels:%d /t \n", position, positionOffset, positionOffsetPixels);
 //            }
 //
 //            @Override
 //            public void onPageScrollStateChanged(int state) {
-////                System.out.printf("MainActivity onPageScrollStateChanged====state:%d /t", state);
+//                System.out.printf("MainActivity onPageScrollStateChanged====state:%d /t  \n", state);
 //
 //            }
 //        });
