@@ -10,18 +10,21 @@
 
 # Usage
 
-### Jcenter
-gradle
+### JicPack
+Add it in your root build.gradle at the end of repositories:
 
-    compile 'com.zone:zbanner:1.0.0'
-pom.xml
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+Step 2. Add the dependency
 
-    <dependency>
-      <groupId>com.zone</groupId>
-      <artifactId>zbanner</artifactId>
-      <version>1.0.0</version>
-      <type>pom</type>
-    </dependency>
+	dependencies {
+    	        compile 'com.github.luhaoaimama1:Zbanner:1.0.1'
+    	}
+    
 # Preview
 ### incatorshape:
 ![](./demo/shape.gif)

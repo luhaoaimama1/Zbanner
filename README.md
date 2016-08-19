@@ -10,19 +10,21 @@ An infinite loop for the opening and closing of the banner and can open and clos
 - [x] Support (build.version.sdk_int < 11) page switching animation and the parent class is viewpager instead of a new class of benefits that can be used with a lot of support for the viewpager framework.
 
 
-### Jcenter
+### JicPack
+Add it in your root build.gradle at the end of repositories:
 
-gradle
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+Step 2. Add the dependency
 
-    compile 'com.zone:zbanner:1.0.0'
-pom.xml
-
-    <dependency>
-      <groupId>com.zone</groupId>
-      <artifactId>zbanner</artifactId>
-      <version>1.0.0</version>
-      <type>pom</type>
-    </dependency>
+	dependencies {
+    	        compile 'com.github.luhaoaimama1:Zbanner:1.0.1'
+    	}
+    
 # Preview
 ### incatorshape:
 ![](./demo/shape.gif)
