@@ -20,11 +20,8 @@ Add it in your root build.gradle at the end of repositories:
 		}
 	}
 Step 2. Add the dependency
+>  compile 'com.github.luhaoaimama1:Zbanner:[Latest release](https://github.com/luhaoaimama1/Zbanner/releases)'
 
-	dependencies {
-    	        compile 'com.github.luhaoaimama1:Zbanner:1.0.1'
-    	}
-    
 # Preview
 ### incatorshape:
 ![](./demo/shape.gif)
