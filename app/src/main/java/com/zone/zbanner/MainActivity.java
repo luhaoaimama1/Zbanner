@@ -46,7 +46,6 @@ public class MainActivity extends Activity {
         mviewPager = new PagerAdapterCircle_Image(this, list, true) {
             @Override
             public void setImage(ImageView iv, final int position) {
-//                iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 Glide.with(MainActivity.this).load(list.get(position)).centerCrop()
                         .placeholder(R.drawable.ic_stub)
                         .error(R.drawable.ic_error).dontAnimate().into(iv);
@@ -61,7 +60,6 @@ public class MainActivity extends Activity {
         mviewPagerNoCircle = new PagerAdapterCircle_Image(this, list, false) {
             @Override
             public void setImage(final ImageView iv, final int position) {
-//                iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 Glide.with(MainActivity.this).load(list.get(position)).centerCrop()
                         .placeholder(R.drawable.ic_stub)
                         .error(R.drawable.ic_error).dontAnimate().into(iv);
@@ -106,7 +104,6 @@ public class MainActivity extends Activity {
         selectBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.perm_group_location_selected));
         imageIndicator.setDefaultBitmaps(defaultBitmaps);
         imageIndicator.setSelectBitmaps(selectBitmaps);
-
 
         //如果我们要对ViewPager设置监听，用indicator设置就行了
 //        indicatorView.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

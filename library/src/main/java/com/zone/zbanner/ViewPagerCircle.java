@@ -151,11 +151,11 @@ public class ViewPagerCircle extends ViewPagerCompat {
 		}
 	}
 
-
     @Override
     public int getCurrentItem() {
         return super.getCurrentItem()%adapter.getSize();
     }
+
     private int getCurrentItemZone() {
         return super.getCurrentItem();
     }
