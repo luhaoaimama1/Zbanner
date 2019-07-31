@@ -1,15 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '23.0.3'
+    compileSdkVersion 28
 
     defaultConfig {
+        minSdkVersion 16
         applicationId "com.zone.zbanner"
-        minSdkVersion 21
-        targetSdkVersion 22
-        versionCode 1
-        versionName "1.0"
     }
     buildTypes {
         release {
@@ -21,10 +17,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-//    compile project(':library')
-    compile 'com.github.luhaoaimama1:Zbanner:1.0.1'
-    compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    api project(':library')
+//    compile 'com.github.luhaoaimama1:Zbanner:1.0.1'
+    api 'com.android.support:appcompat-v7:22.1.1'
+    api 'com.github.bumptech.glide:glide:3.7.0'
 }
