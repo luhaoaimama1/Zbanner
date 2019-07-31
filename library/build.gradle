@@ -11,7 +11,6 @@ android {
         minSdkVersion 14
         versionCode 1
         versionName "1.0"
-        targetSdkVersion 19
     }
     buildTypes {
         release {
@@ -28,7 +27,7 @@ android {
     }
 }
 dependencies {
-    api 'com.android.support:support-v4:22.1.1'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
     api 'com.nineoldandroids:library:2.4.0'
 }
 
@@ -53,85 +52,3 @@ artifacts {
     archives sourcesJar
     archives javadocJar
 }
-// uncomment to build a jar file in addition to the default aar file
-//android.libraryVariants.all { variant ->
-//    def name = variant.buildType.name
-//    def task = project.tasks.create "jar${name.capitalize()}", Jar
-//    task.dependsOn variant.javaCompile
-//    task.from variant.javaCompile.destinationDir
-//    artifacts.add('archives', task);
-//}
-//---------------jitPack 文档注释Over------------------------
-
-
-////添加
-//publish {
-//    userOrg = 'luhaoaimama1'//bintray.com用户名
-//    groupId = 'com.zone'//jcenter上的路径
-//    artifactId = 'zbanner'//项目名称
-//    publishVersion = '1.0.0'//版本号
-//    desc = 'zbanner is a viewpager about circle~'//描述，不重要
-//    website = 'https://github.com/luhaoaimama1'//网站，不重要
-//}
-//
-//
-//
-//
-//
-//android.libraryVariants.all { variant ->
-//    println "create generate${variant.name.capitalize()}Javadoc"
-//    task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-//        // title = ''
-//        // description = ''
-//        source = variant.javaCompile.source
-//        classpath = files(variant.javaCompile.classpath.files, project.android.getBootClasspath())
-//        options {
-//            encoding "utf-8"
-//            links "http://docs.oracle.com/javase/7/docs/api/"
-//            linksOffline "http://d.android.com/reference", "${android.sdkDirectory}/docs/reference"
-//        }
-//        exclude '**/BuildConfig.java'
-//        exclude '**/R.java'
-//    }
-//    task("javadoc${variant.name.capitalize()}Jar", type: Jar, dependsOn: "generate${variant.name.capitalize()}Javadoc") {
-//        classifier = 'javadoc'
-//        from tasks.getByName("generate${variant.name.capitalize()}Javadoc").destinationDir
-//    }
-//    artifacts {
-//        archives tasks.getByName("javadoc${variant.name.capitalize()}Jar")
-//    }
-//}
-//
-//
-//tasks.withType(JavaCompile) { options.encoding = "UTF-8" }
-//
-//
-//task sourcesJar(type: Jar) {
-//    from android.sourceSets.main.java.srcDirs
-//    classifier = 'sources'
-//}
-//task javadoc(type: Javadoc) {
-//    source = android.sourceSets.main.java.srcDirs
-//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-//
-//}
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//    classifier = 'javadoc'
-//    from javadoc.destinationDir
-//}
-//
-//javadoc {
-//    options {
-//        encoding "UTF-8"
-//        charSet 'UTF-8'
-//        author true // 支持author标记
-//        version true // 支持version标记
-//        links "http://docs.oracle.com/javase/7/docs/api"
-//    }
-//}
-//
-//
-//artifacts {
-//    archives javadocJar
-//    archives sourcesJar
-//}

@@ -1,7 +1,7 @@
 package com.zone.zbanner;
 import android.content.Context;
 import android.os.Handler;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import com.zone.zbanner.viewpager.ViewPagerCompat;
 

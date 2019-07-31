@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,7 +15,6 @@ import com.zone.zbanner.indicator.type.ImageIndicator;
 import com.zone.zbanner.indicator.type.LineIndicator;
 import com.zone.zbanner.indicator.type.abstarct.ShapeIndicator;
 import com.zone.zbanner.simpleadapter.PagerAdapterCircle_Image;
-import com.zone.zbanner.viewpage_anime.TestAnime;
 
 import java.util.ArrayList;
 import java.util.List;

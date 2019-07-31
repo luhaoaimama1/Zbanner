@@ -1,7 +1,7 @@
 package com.zone.zbanner;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager.widget.ViewPager;
 
 /**
  * Created by fuzhipeng on 16/8/19.
