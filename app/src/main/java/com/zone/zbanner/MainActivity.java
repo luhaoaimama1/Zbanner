@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.zone.viewpage_anime.HorizontalStackTransformerWithRotation;
 import com.zone.zbanner.indicator.IndicatorView;
 import com.zone.zbanner.indicator.type.CircleIndicator;
 import com.zone.zbanner.indicator.type.ImageIndicator;
 import com.zone.zbanner.indicator.type.LineIndicator;
 import com.zone.zbanner.indicator.type.abstarct.ShapeIndicator;
 import com.zone.zbanner.simpleadapter.PagerAdapterCircle_Image;
+import com.zone.viewpage_anime.TestAnime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +53,7 @@ public class MainActivity extends Activity {
                 iv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        System.out.println("position:"+position);
+                        System.out.println("position:" + position);
                     }
                 });
             }
@@ -66,15 +68,20 @@ public class MainActivity extends Activity {
                 iv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        System.out.println("position:"+position);
+                        System.out.println("position:" + position);
                     }
                 });
             }
         };
 
         pager.setAdapter(mviewPager, 2);
-//        pager.setPageTransformer(true, new TestAnime());
-        pager.setPageTransformer(true, null);
+        if (!isDefaultPageTransformer) {
+            pager.setPageTransformer(true, new HorizontalStackTransformerWithRotation(pager));
+            ToastUtils.showLong(MainActivity.this, "滑动动画自定义");
+        } else {
+            pager.setPageTransformer(true, null);
+            ToastUtils.showLong(MainActivity.this, "滑动动画默认");
+        }
         pager.setPageMargin(50);
         pager.setOffscreenPageLimit(3);
 //        new FixedSpeedScroller(this).setViewPager(pager);
@@ -136,6 +143,7 @@ public class MainActivity extends Activity {
     }
 
     boolean isDefault = true;
+    static boolean isDefaultPageTransformer = true;
     boolean isOpenTime = false;
     boolean isCircle = true;
     Shape shape = Shape.circle;
@@ -152,6 +160,11 @@ public class MainActivity extends Activity {
                     isDefault = true;
                     ToastUtils.showLong(MainActivity.this, "变成Default");
                 }
+                break;
+
+            case R.id.bt_toggle_change_animate:
+                isDefaultPageTransformer=!isDefaultPageTransformer;
+                recreate();
                 break;
             case R.id.bt_toggleTime:
                 if (isOpenTime) {
@@ -193,16 +206,16 @@ public class MainActivity extends Activity {
                 break;
             case R.id.togCircle:
                 if (isCircle) {
-                    pager.setAdapter(mviewPagerNoCircle, 2);
+                    pager.setAdapter(mviewPagerNoCircle, pager.getCurrentItem());
                     isCircle = false;
                     indicatorView.setViewPager(pager);
-                    indicatorView.setIndicator(circleIndicator);
+                    indicatorView.setIndicator(indicatorView.getIndicator());
                     ToastUtils.showLong(MainActivity.this, "关闭循环");
                 } else {
-                    pager.setAdapter(mviewPager, 2);
+                    pager.setAdapter(mviewPager,  pager.getCurrentItem());
                     isCircle = true;
                     indicatorView.setViewPager(pager);
-                    indicatorView.setIndicator(circleIndicator);
+                    indicatorView.setIndicator(indicatorView.getIndicator());
                     ToastUtils.showLong(MainActivity.this, "开启循环");
                 }
                 if (isDefault)

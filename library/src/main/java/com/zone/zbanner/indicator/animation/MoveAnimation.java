@@ -1,5 +1,4 @@
 package com.zone.zbanner.indicator.animation;
-import com.nineoldandroids.view.ViewHelper;
 import com.zone.zbanner.indicator.IndicatorView;
 import com.zone.zbanner.indicator.animation.abstarct.BaseAnimation;
 
@@ -21,7 +20,7 @@ public class MoveAnimation extends BaseAnimation {
         scrolledPosition=position;
         if(position!=indicatorView.getIndeciatorCount()-1){
             //The last one before the operation
-            ViewHelper.setX(indicatorView.getIv_Top(),itemLength * (position + positionOffset));
+            indicatorView.getIv_Top().setX(itemLength * (position + positionOffset));
         }
     }
 
@@ -33,7 +32,7 @@ public class MoveAnimation extends BaseAnimation {
         if (!((scrolledPosition==0&&position==0)||(scrolledPosition==indicatorView.getIndeciatorCount()-2&&position==indicatorView.getIndeciatorCount()-1))) {
             if(position==0||position==indicatorView.getIndeciatorCount()-1){
                 //0, last-1  Set select because there is no move at this time
-                ViewHelper.setX(indicatorView.getIv_Top(),itemLength * position);
+                indicatorView.getIv_Top().setX(itemLength * position);
             }
         }
     }

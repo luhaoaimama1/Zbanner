@@ -1,6 +1,5 @@
 package com.zone.zbanner.indicator.animation;
 
-import com.nineoldandroids.view.ViewHelper;
 import com.zone.zbanner.indicator.IndicatorView;
 import com.zone.zbanner.indicator.animation.abstarct.BaseAnimation;
 
@@ -22,6 +21,6 @@ public class DefaultAnimation extends BaseAnimation {
     @Override
     public void onPageSelected(int position) {
         super.onPageSelected(position);
-        ViewHelper.setX(indicatorView.getIv_Top() , itemLength * position);
+        indicatorView.getIv_Top().setX( itemLength * position);
     }
 }

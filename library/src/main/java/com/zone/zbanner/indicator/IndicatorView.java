@@ -9,21 +9,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import com.nineoldandroids.view.ViewHelper;
 import com.zone.banner.R;
 import com.zone.zbanner.PagerAdapterCycle;
 import com.zone.zbanner.indicator.animation.DefaultAnimation;
 import com.zone.zbanner.indicator.animation.MoveAnimation;
 import com.zone.zbanner.indicator.animation.abstarct.BaseAnimation;
 import com.zone.zbanner.indicator.type.abstarct.BaseIndicator;
-import com.zone.zbanner.viewpager.ViewPagerCompat;
 /**
  * Created by Administrator on 2016/1/27.
  * viewpager linkage
  */
 public class IndicatorView extends RelativeLayout implements ViewPager.OnPageChangeListener {
     private Context context;
-    private ViewPagerCompat mViewPager;
+    private ViewPager mViewPager;
     private LinearLayout ll_bottom;
     private FrameLayout fl_top;
     private ViewPager.OnPageChangeListener pageChangeListener;
@@ -44,7 +42,7 @@ public class IndicatorView extends RelativeLayout implements ViewPager.OnPageCha
         this.context = context;
     }
 
-    public void setViewPager(ViewPagerCompat mViewPager) {
+    public void setViewPager(ViewPager mViewPager) {
         if(mViewPager.getAdapter()==null)
             throw new IllegalStateException("must be use setAdapter!");
         if (mViewPager.getAdapter() instanceof PagerAdapterCycle) {
@@ -79,6 +77,9 @@ public class IndicatorView extends RelativeLayout implements ViewPager.OnPageCha
     private BaseIndicator indicator;
     private ImageView iv_Top;
 
+    public BaseIndicator getIndicator() {
+        return indicator;
+    }
     public void setIndicator(BaseIndicator indicator) {
         indicator.setIndicatorView(this);
         this.indicator = indicator;
@@ -120,7 +121,7 @@ public class IndicatorView extends RelativeLayout implements ViewPager.OnPageCha
         fl_top.setLayoutParams(params_ll_2);
         //iv_Top init position
         iv_Top.setImageBitmap(indicator.getSelectedBitmap(mViewPager.getCurrentItem()));
-        ViewHelper.setX(iv_Top, mViewPager.getCurrentItem() * (betweenMargin + indicator.getWidth()));
+        iv_Top.setX( mViewPager.getCurrentItem() * (betweenMargin + indicator.getWidth()));
 
     }
 

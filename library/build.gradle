@@ -28,7 +28,6 @@ android {
 }
 dependencies {
     api 'androidx.legacy:legacy-support-v4:1.0.0'
-    api 'com.nineoldandroids:library:2.4.0'
 }
 
 //---------------jitPack 文档注释 Start------------------------

@@ -3,10 +3,9 @@ import android.content.Context;
 import android.os.Handler;
 import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
-import com.zone.zbanner.viewpager.ViewPagerCompat;
 
 // Mainly used for banner pages and boot boot page
-public class ViewPagerCircle extends ViewPagerCompat {
+public class ViewPagerCircle extends ViewPager {
 	private final Context context;
 	private long delayMillis=3000;
 	private boolean isTimeDelay=false;
@@ -89,10 +88,7 @@ public class ViewPagerCircle extends ViewPagerCompat {
 			ViewPager.OnPageChangeListener listenerSet = new ViewPager.OnPageChangeListener() {
 				@Override
 				public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-					if(positionOffsetPixels!=0)
-						pauseCircle();
-					else
-						againTiming();
+					System.out.println("app-->onPageScrolled position："+position+"\t positionOffset"+positionOffset+"\t positionOffsetPixels:"+positionOffsetPixels);
 					int reallyPosition = position % adapter.getSize();
 					if (mListener!=null)
 						mListener.onPageScrolled(reallyPosition, positionOffset, positionOffsetPixels);
@@ -107,6 +103,11 @@ public class ViewPagerCircle extends ViewPagerCompat {
 
 				@Override
 				public void onPageScrollStateChanged(int state) {
+					if(state!=0)
+						pauseCircle();
+					else
+						againTiming();
+					System.out.println("app-->滚动状态state："+state);
 					if (mListener!=null)
 						mListener.onPageScrollStateChanged(state);
 				}

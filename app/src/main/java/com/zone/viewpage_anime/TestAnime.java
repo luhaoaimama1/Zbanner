@@ -1,9 +1,8 @@
-package com.zone.zbanner.viewpage_anime;
+package com.zone.viewpage_anime;
 
 import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
-import com.nineoldandroids.view.ViewHelper;
 
 /**
  * Simple transparency to combine
@@ -15,12 +14,12 @@ public class TestAnime implements ViewPager.PageTransformer {
 //     Position page of the a change is  ( 0, -1] 1-0
 //      Position page of the B change is [ 1 , 0 ]0-1
         if (position <= 0 && position >= -1) {
-            ViewHelper.setAlpha(page, position + 1);
-            ViewHelper.setTranslationX(page, 0);
+            page.setAlpha(position + 1);
+            page.setTranslationX(0);
         }
         if (position > 0 && position <= 1) {
-            ViewHelper.setAlpha(page, 1 - position);
-            ViewHelper.setTranslationX(page, page.getWidth() * -position);
+            page.setAlpha(1 - position);
+            page.setTranslationX(page.getWidth() * -position);
 //            ViewHelper.animate(page).setDuration(2000).rotationYBy(720).x(100).y(100);
         }
 
