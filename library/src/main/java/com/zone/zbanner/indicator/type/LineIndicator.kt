@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import com.zone.zbanner.indicator.type.abstarct.BaseIndicator
 import com.zone.zbanner.indicator.type.abstarct.ShapeIndicator
 
 /**
@@ -15,7 +16,7 @@ class LineIndicator(width: Int, height: Int) : ShapeIndicator(width, height) {
         setBetweenMargin(width / 2)
     }
 
-    override fun getBitmap(bitmap: Bitmap, shapeStyle: ShapeIndicator.ShapeEntity) {
+    override fun getBitmap(bitmap: Bitmap, shapeStyle: ShapeEntity) {
         val canvas = Canvas(bitmap)
         //fill
         initPaint()
@@ -38,16 +39,15 @@ class LineIndicator(width: Int, height: Int) : ShapeIndicator(width, height) {
             width - shapeStyle.getStrokeWidthHalf(), height - shapeStyle.getStrokeWidthHalf(), paint)
     }
 
-    override fun getDefaultBitmap(position: Int): Bitmap {
-        return defaultBitmap
-    }
+    override fun getDefaultBitmap(position: Int): Bitmap = defaultBitmap
 
-    override fun getSelectedBitmap(position: Int): Bitmap {
-        return selectedBitmap
-    }
+    override fun getSelectedBitmap(position: Int): Bitmap = selectedBitmap
 
     override fun onPageSelected(position: Int) {
         super.onPageSelected(position)
-        indicatorView!!.ivTop.setImageBitmap(getSelectedBitmap(position))
+        indicatorView?.ivTop?.setImageBitmap(getSelectedBitmap(position))
     }
+
+    override fun clone_(): BaseIndicator = LineIndicator(0, 0)
+
 }

@@ -10,7 +10,13 @@ import com.zone.zbanner.PagerAdapterCycle
 /**
  * Created by Zone on 2016/1/27.
  */
-abstract class PagerAdapterCircleImage<T>(context: Context, data: List<*>, isCircle: Boolean) : PagerAdapterCycle<*>(context, data, isCircle), SimpleAdapterSetImage {
+
+interface SimpleAdapterSetImage {
+    fun setImage(iv: ImageView, position: Int)
+}
+
+abstract class PagerAdapterCircleImage<T>(context: Context, data: List<T>, isCircle: Boolean)
+    : PagerAdapterCycle<T>(context, data, isCircle), SimpleAdapterSetImage {
 
     override fun getView(context: Context, position: Int): View {
         val iv = ImageView(context)

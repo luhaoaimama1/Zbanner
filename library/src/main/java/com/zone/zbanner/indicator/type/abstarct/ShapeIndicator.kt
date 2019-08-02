@@ -8,32 +8,31 @@ import android.graphics.Paint
  * Created by Zone on 2016/2/3.
  */
 abstract class ShapeIndicator(width: Int, height: Int) : BaseIndicator(width, height) {
-    protected var paint: Paint? = null
-    protected var defaultShapeStyle: ShapeEntity
-    protected var topShapeStyle: ShapeEntity
-    protected var defaultBitmap: Bitmap
-    protected var selectedBitmap: Bitmap
+    protected var defaultShapeStyle: ShapeEntity = ShapeEntity().setFillColor(Color.WHITE)
+    protected var topShapeStyle: ShapeEntity = ShapeEntity().setFillColor(Color.RED)
 
-    init {
-        paint = Paint()
-        setShapeEntity(ShapeEntity().setFillColor(Color.WHITE), ShapeEntity().setFillColor(Color.RED))
-    }
+    protected var paint: Paint = Paint()
+    protected lateinit var defaultBitmap: Bitmap
+    protected lateinit var selectedBitmap: Bitmap
+
 
     protected fun initPaint() {
-        paint!!.reset()
-        paint!!.isAntiAlias = true
-        paint!!.isDither = true
-        paint!!.isFilterBitmap = true
+        paint.reset()
+        paint.isAntiAlias = true
+        paint.isDither = true
+        paint.isFilterBitmap = true
     }
 
     fun setShapeEntity(defaultCircleStyle: ShapeEntity, topCircleStyle: ShapeEntity): ShapeIndicator {
         this.defaultShapeStyle = defaultCircleStyle
         this.topShapeStyle = topCircleStyle
-        createDefalutBitmap()
-        createSelectedBitmap()
         return this
     }
 
+    override fun generateBitmaps() {
+        createDefalutBitmap()
+        createSelectedBitmap()
+    }
 
     private fun createDefalutBitmap() {
         defaultBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_4444)
@@ -46,6 +45,13 @@ abstract class ShapeIndicator(width: Int, height: Int) : BaseIndicator(width, he
     }
 
     protected abstract fun getBitmap(bitmap: Bitmap, shapeStyle: ShapeEntity)
+
+    override fun cloneForabstract(oldObj: BaseIndicator) = apply {
+        super.cloneForabstract(oldObj)
+        val shapeIndicatorOld = oldObj as ShapeIndicator
+        defaultShapeStyle = shapeIndicatorOld.defaultShapeStyle
+        topShapeStyle = shapeIndicatorOld.topShapeStyle
+    }
 
     //fillRadius=radius-strokeWidthHalf;
     class ShapeEntity {

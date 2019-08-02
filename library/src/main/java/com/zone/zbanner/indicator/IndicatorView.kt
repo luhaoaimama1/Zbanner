@@ -5,7 +5,6 @@ import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -15,135 +14,175 @@ import com.zone.zbanner.PagerAdapterCycle
 import com.zone.zbanner.indicator.animation.DefaultAnimation
 import com.zone.zbanner.indicator.animation.MoveAnimation
 import com.zone.zbanner.indicator.animation.abstarct.BaseAnimation
+import com.zone.zbanner.indicator.type.CircleIndicator
 import com.zone.zbanner.indicator.type.abstarct.BaseIndicator
 
 /**
  * Created by Administrator on 2016/1/27.
  * viewpager linkage
+ *
+ * use example 1:
+ *  1：setViewPager （viewPager,indicator）
+ *
+ * use example 2:
+ *  1：setViewPager(viewPager)
+ *  2: indicator
  */
-class IndicatorView @JvmOverloads constructor(private val context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : RelativeLayout(context, attrs, defStyleAttr), ViewPager.OnPageChangeListener {
-    private var mViewPager: ViewPager? = null
-    private var ll_bottom: LinearLayout? = null
-    private var fl_top: FrameLayout? = null
-    private var pageChangeListener: ViewPager.OnPageChangeListener? = null
-    var indeciatorCount: Int = 0
-        private set
+class IndicatorView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
+    : RelativeLayout(context, attrs, defStyleAttr), ViewPager.OnPageChangeListener {
+    private lateinit var mViewPager: ViewPager
+    private lateinit var llBottom: LinearLayout
+    private lateinit var flTop: FrameLayout
+    lateinit var ivTop: ImageView
+    var pageChangeListener: ViewPager.OnPageChangeListener? = null
+    var indicatorCount: Int = 0
     private var betweenMargin = 0
     private var animation: BaseAnimation? = null
+
+    class Config {
+        var mIsSnap = false
+        var mShape: BaseIndicator? = null
+    }
+
+    companion object {
+        var config: Config? = null
+    }
+
+    //init llBottom
+    //init flTop
+    //Set animation
+    //Tips: 这里 mViewPager  llBottom fl_top都是有值的 是在setViewPager之后使用
+    private lateinit var indicator: BaseIndicator
+
+    fun getIndicator() = indicator
+
+    fun setIndicator(indicator: BaseIndicator) {
+        this.indicator = indicator
+        indicator.indicatorView = this
+        indicator.generateBitmaps()
+
+        this.betweenMargin = indicator.betweenMargin
+        llBottom.removeAllViews()
+        flTop.removeAllViews()
+        initFLTop(initLLBottom())
+
+        initSnap()
+    }
+
     var snap = false
         set(snap) {
             field = snap
-            if (snap)
-                animation = MoveAnimation(this, betweenMargin + this.indicator!!.width)
-            else
-                animation = DefaultAnimation(this, betweenMargin + this.indicator!!.width)
+            generateMoveAnimate(snap)
         }
 
-    //init ll_bottom
-    //init fl_top
-    //Set animation
-    var indicator: BaseIndicator? = null
-        set(indicator) {
-            indicator.setIndicatorView(this)
-            field = indicator
-            this.betweenMargin = indicator.getBetweenMargin()
-            ll_bottom!!.removeAllViews()
-            fl_top!!.removeAllViews()
-            val ll_bottom_sumWidth = initLl_bottom()
-            initFl_top(ll_bottom_sumWidth)
-            animation = DefaultAnimation(this, betweenMargin + indicator.getWidth())
-        }
-    var iv_Top: ImageView? = null
-        private set
 
-    fun setViewPager(mViewPager: ViewPager) {
-        if (mViewPager.adapter == null)
-            throw IllegalStateException("must be use setAdapter!")
-        if (mViewPager.adapter is PagerAdapterCycle<*>) {
-            indeciatorCount = (mViewPager.adapter as PagerAdapterCycle<*>).size
-        } else {
-            indeciatorCount = mViewPager.adapter!!.count
-        }
-        mViewPager.setOnPageChangeListener(this)
+    //默认的
+    val circleIndicator = CircleIndicator(20)
+
+    /**
+     * 不设置indicator 会给默认值的
+     */
+    @JvmOverloads
+    fun setViewPager(mViewPager: ViewPager, indicator: BaseIndicator = circleIndicator) {
         this.mViewPager = mViewPager
-        if (indeciatorCount == 1)
-            visibility = View.INVISIBLE
-        else
-            visibility = View.VISIBLE
+        if (this.mViewPager.adapter == null) throw IllegalStateException("must be use setAdapter!")
+        if (this.mViewPager.adapter is PagerAdapterCycle<*>) {
+            indicatorCount = (this.mViewPager.adapter as? PagerAdapterCycle<*>)?.size ?: 0
+        } else {
+            indicatorCount = this.mViewPager.adapter?.count ?: 0
+        }
+        this.mViewPager.setOnPageChangeListener(this)
+
+        visibility = if (indicatorCount == 1) View.INVISIBLE
+        else View.VISIBLE
         removeAllViews()
         initView()
+
+        initIndicator(indicator)
     }
 
 
-    fun setOnPageChangeListener(pageChangeListener: ViewPager.OnPageChangeListener) {
-        this.pageChangeListener = pageChangeListener
+    private fun generateMoveAnimate(snap: Boolean) {
+        animation = if (snap) MoveAnimation(this, betweenMargin + this.indicator.width)
+        else DefaultAnimation(this, betweenMargin + this.indicator.width)
+    }
+
+    fun initSnap(){
+        //如果全局设置的指示器的移动方式 则采用全局
+        if (config != null) {
+            config?.let {
+                generateMoveAnimate(it.mIsSnap)
+            }
+        } else animation = DefaultAnimation(this, betweenMargin + indicator.width)
+    }
+
+    //全局indicator不为空  并且第二个参数indicator没有设置  则启用全局
+    private fun initIndicator(indicator: BaseIndicator) {
+        if (indicator == circleIndicator && config?.mShape != null) {
+            config?.mShape?.let {
+                setIndicator(it.clone_().cloneForabstract(it))
+            }
+        } else {
+            setIndicator(indicator)
+        }
     }
 
 
     private fun initView() {
         val inflater = LayoutInflater.from(context)
-        ll_bottom = inflater.inflate(R.layout.core2_linear, null, false) as LinearLayout
-        fl_top = inflater.inflate(R.layout.core2_frame, null, false) as FrameLayout
-        addView(ll_bottom)
-        addView(fl_top)
+        llBottom = inflater.inflate(R.layout.core2_linear, this, false) as LinearLayout
+        flTop = inflater.inflate(R.layout.core2_frame, this, false) as FrameLayout
+        addView(llBottom)
+        addView(flTop)
     }
 
-    private fun initLl_bottom(): Int {
-        var ll_bottom_sumWidth = 0
-        for (i in 0 until indeciatorCount) {
+    private fun initLLBottom(): Int {
+        var llBottomSumWidth = 0
+        for (i in 0 until indicatorCount) {
             val iv = ImageView(context)
-            val params = LinearLayout.LayoutParams(this.indicator!!.width, this.indicator!!.height)
-            ll_bottom_sumWidth += this.indicator!!.width
-            if (i != indeciatorCount - 1) {
+            val params = LinearLayout.LayoutParams(this.indicator.width, this.indicator.height)
+            llBottomSumWidth += this.indicator.width
+            if (i != indicatorCount - 1) {
                 params.rightMargin = betweenMargin
-                ll_bottom_sumWidth += betweenMargin
+                llBottomSumWidth += betweenMargin
             }
             iv.layoutParams = params
-            iv.setImageBitmap(this.indicator!!.getDefaultBitmap(i))
-            ll_bottom!!.addView(iv)
+            iv.setImageBitmap(this.indicator.getDefaultBitmap(i))
+            llBottom.addView(iv)
         }
-        return ll_bottom_sumWidth
+        return llBottomSumWidth
     }
 
-    private fun initFl_top(ll_bottom_sumWidth: Int) {
-        iv_Top = ImageView(context)
-        val params2 = LinearLayout.LayoutParams(this.indicator!!.width, this.indicator!!.height)
-        iv_Top!!.layoutParams = params2
-        fl_top!!.addView(iv_Top)
-        val params_ll_2 = fl_top!!.layoutParams
-        params_ll_2.width = ll_bottom_sumWidth
-        fl_top!!.layoutParams = params_ll_2
-        //iv_Top init position
-        iv_Top!!.setImageBitmap(this.indicator!!.getSelectedBitmap(mViewPager!!.currentItem))
-        iv_Top!!.x = (mViewPager!!.currentItem * (betweenMargin + this.indicator!!.width)).toFloat()
+    private fun initFLTop(ll_bottom_sumWidth: Int) {
+        ivTop = ImageView(context)
+        val params2 = LinearLayout.LayoutParams(this.indicator.width, this.indicator.height)
+        ivTop.layoutParams = params2
+        flTop.addView(ivTop)
+        val flTopLp = flTop.layoutParams
+        flTopLp.width = ll_bottom_sumWidth
+        flTop.layoutParams = flTopLp
+        //ivTop init position
+        ivTop.setImageBitmap(this.indicator.getSelectedBitmap(mViewPager.currentItem))
+        ivTop.x = (mViewPager.currentItem * (betweenMargin + this.indicator.width)).toFloat()
 
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-        if (this.indicator != null)
-            this.indicator!!.onPageScrolled(position, positionOffset, positionOffsetPixels)
-        if (animation != null)
-            animation!!.onPageScrolled(position, positionOffset, positionOffsetPixels)
-        if (pageChangeListener != null)
-            pageChangeListener!!.onPageScrolled(position, positionOffset, positionOffsetPixels)
+        indicator.onPageScrolled(position, positionOffset, positionOffsetPixels)
+        animation?.onPageScrolled(position, positionOffset, positionOffsetPixels)
+        pageChangeListener?.onPageScrolled(position, positionOffset, positionOffsetPixels)
     }
 
     override fun onPageSelected(position: Int) {
-        if (this.indicator != null)
-            this.indicator!!.onPageSelected(position)
-        if (animation != null)
-            animation!!.onPageSelected(position)
-        if (pageChangeListener != null)
-            pageChangeListener!!.onPageSelected(position)
+        indicator.onPageSelected(position)
+        animation?.onPageSelected(position)
+        pageChangeListener?.onPageSelected(position)
     }
 
     override fun onPageScrollStateChanged(state: Int) {
-        if (this.indicator != null)
-            this.indicator!!.onPageScrollStateChanged(state)
-        if (animation != null)
-            animation!!.onPageScrollStateChanged(state)
-        if (pageChangeListener != null)
-            pageChangeListener!!.onPageScrollStateChanged(state)
+        indicator.onPageScrollStateChanged(state)
+        animation?.onPageScrollStateChanged(state)
+        pageChangeListener?.onPageScrollStateChanged(state)
     }
 
 }

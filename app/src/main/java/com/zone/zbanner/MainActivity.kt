@@ -42,15 +42,14 @@ class MainActivity : Activity() {
     lateinit var imageIndicator: ImageIndicator
 
     init {
-
         //全局设置可以打开 这个
-        IndicatorView.config = IndicatorView.Config().apply {
-            mIsSnap = true
-            mShape = LineIndicator(50, 30).setShapeEntity(
-                ShapeIndicator.ShapeEntity().setStrokeWidthHalf(2.5f).setStrokeColor(Color.BLACK).setHaveFillColor(false),
-                ShapeIndicator.ShapeEntity().setFillColor(Color.RED)
-            )
-        }
+//        IndicatorView.config = IndicatorView.Config().apply {
+//            mIsSnap = true
+//            mShape = LineIndicator(50, 30).setShapeEntity(
+//                ShapeIndicator.ShapeEntity().setStrokeWidthHalf(2.5f).setStrokeColor(Color.BLACK).setHaveFillColor(false),
+//                ShapeIndicator.ShapeEntity().setFillColor(Color.RED)
+//            )
+//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

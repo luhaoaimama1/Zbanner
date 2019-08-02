@@ -10,7 +10,6 @@ class MoveAnimation(indicatorView: IndicatorView, itemLength: Int) : BaseAnimati
 
     private var scrolledPosition = -1
 
-
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
         super.onPageScrolled(position, positionOffset, positionOffsetPixels)
         scrolledPosition = position
