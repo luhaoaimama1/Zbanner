@@ -22,6 +22,5 @@ public class TestAnime implements ViewPager.PageTransformer {
             page.setTranslationX(page.getWidth() * -position);
 //            ViewHelper.animate(page).setDuration(2000).rotationYBy(720).x(100).y(100);
         }
-
     }
 }

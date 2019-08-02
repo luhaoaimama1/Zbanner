@@ -53,7 +53,19 @@ Step 2. Add the dependency
  
  4.indicatorView的关联与背景(方形 圆形 图片)
  参考demo
-  
+
+ 5.全局设置 指示器配置   <  类中的配置
+
+ ``` java
+    IndicatorView.config = IndicatorView.Config().apply {
+             mIsSnap = true
+             mShape = LineIndicator(50, 30).setShapeEntity(
+                 ShapeIndicator.ShapeEntity().setStrokeWidthHalf(2.5f).setStrokeColor(Color.BLACK).setHaveFillColor(false),
+                 ShapeIndicator.ShapeEntity().setFillColor(Color.RED)
+             )
+         }
+ ```
+
 
 # Reference&Thanks：
 https://github.com/daimajia/AndroidImageSlider

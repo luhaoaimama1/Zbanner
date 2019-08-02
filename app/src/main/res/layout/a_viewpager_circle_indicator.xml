@@ -2,13 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:clipChildren="false"
-    android:background="#fff827">
+    android:clipChildren="false">
 
     <com.zone.zbanner.ViewPagerCircle
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="225dp"
         android:background="#ffa3a3"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"
@@ -16,62 +15,22 @@
 
     <com.zone.zbanner.indicator.IndicatorView
         android:id="@+id/indicatorView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="#fff827"
+        android:layout_height="35dp"
+        android:gravity="center"
         android:layout_alignParentBottom="false"
         android:layout_below="@+id/pager"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="8dp" />
 
     <!--android:background="#61e7ff"-->
 
     <LinearLayout
-        android:id="@+id/ll_bottom"
+        android:id="@+id/ll_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/bt_toggle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="切换指示标移动方式"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/bt_toggle_change_animate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="切换滑动动画"
-            android:textAllCaps="false" />
-        <Button
-            android:id="@+id/togShape"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="切换指示标形状"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/bt_toggleTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="切换定时轮播"
-            android:textAllCaps="false" />
-
-        <Button
-            android:id="@+id/togCircle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/bt_toggle"
-            android:onClick="onClick"
-            android:text="切换收尾循环"
-            android:textAllCaps="false" />
-    </LinearLayout>
-
+        android:layout_below="@id/indicatorView"
+        android:orientation="vertical" />
 
 </RelativeLayout>

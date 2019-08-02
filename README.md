@@ -51,8 +51,20 @@ Step 2. Add the dependency
      indicatorView.setSnap(false);
      indicatorView.setSnap(true);
  
- 4.Indicatorview association with the background (square round picture) reference demo 
-  
+4.Indicatorview association with the background (square round picture) reference demo
+
+5.Global configuration   <  class's configuration
+
+``` java
+   IndicatorView.config = IndicatorView.Config().apply {
+            mIsSnap = true
+            mShape = LineIndicator(50, 30).setShapeEntity(
+                ShapeIndicator.ShapeEntity().setStrokeWidthHalf(2.5f).setStrokeColor(Color.BLACK).setHaveFillColor(false),
+                ShapeIndicator.ShapeEntity().setFillColor(Color.RED)
+            )
+        }
+```
+
 # Reference&Thanks：
 https://github.com/daimajia/AndroidImageSlider
 
