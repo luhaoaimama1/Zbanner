@@ -10,7 +10,7 @@ class ViewPagerCircle @JvmOverloads constructor(context: Context, attrs: Attribu
     var delayMillis: Long = 3000
     private var isTimeDelay = false
     private val initCircle = 200
-    private var adapter: PagerAdapterCycle<*>? = null
+    private lateinit var adapter: PagerAdapterCycle<*>
     private var mListener: ViewPager.OnPageChangeListener? = null
     private val run = Runnable { nextPage() }
     private val currentItemZone: Int
@@ -28,13 +28,15 @@ class ViewPagerCircle @JvmOverloads constructor(context: Context, attrs: Attribu
             currentItem = offset
         setOnPageChangeListener(null)
         FixedSpeedScroller(context).setViewPager(this)
+
+        againTiming() //恢复原来 loop的状态
     }
 
     fun nextPage() {
-        if (adapter!!.isCircle)
+        if (adapter.isCircle)
             setCurrentItem(currentItemZone + 1, true)
         else {
-            if (currentItem != adapter!!.size - 1)
+            if (currentItem != adapter.size - 1)
                 setCurrentItem(currentItemZone + 1, true)
             else
                 pauseCircle()
@@ -42,7 +44,7 @@ class ViewPagerCircle @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     fun previousPage() {
-        if (adapter!!.isCircle)
+        if (adapter.isCircle)
             setCurrentItem(currentItemZone - 1, true)
         else {
             if (currentItem != 0)
@@ -59,16 +61,15 @@ class ViewPagerCircle @JvmOverloads constructor(context: Context, attrs: Attribu
 
     override fun setOnPageChangeListener(listener: ViewPager.OnPageChangeListener?) {
         mListener = listener
-        if (adapter == null) throw IllegalStateException("setAdapter must be use before setOnPageChangeListener!")
         val listenerSet = object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-                val reallyPosition = position % adapter!!.size
+                val reallyPosition = position % adapter.size
                 if (mListener != null)
                     mListener!!.onPageScrolled(reallyPosition, positionOffset, positionOffsetPixels)
             }
 
             override fun onPageSelected(position: Int) {
-                val reallyPosition = position % adapter!!.size
+                val reallyPosition = position % adapter.size
                 if (mListener != null)
                     mListener!!.onPageSelected(reallyPosition)
             }
@@ -93,7 +94,7 @@ class ViewPagerCircle @JvmOverloads constructor(context: Context, attrs: Attribu
     fun openTimeCircle(delayMillis: Long = -1) {
         if (-1L != delayMillis)
             this.delayMillis = delayMillis
-        if (adapter!!.size == 1)
+        if (adapter.size == 1)
             return
         isTimeDelay = true
         againTiming()
@@ -113,6 +114,6 @@ class ViewPagerCircle @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     override fun getCurrentItem(): Int {
-        return super.getCurrentItem() % adapter!!.size
+        return super.getCurrentItem() % adapter.size
     }
 }

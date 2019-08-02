@@ -82,7 +82,7 @@ class MainActivity : Activity() {
                 iv.setOnClickListener { println("position:$position") }
             }
         }
-
+        pager.delayMillis = 2000
         pager.setAdapter(viewPagerNoCircle, 2)
         pager.setPageTransformer(true, null)
         pager.pageMargin = 50

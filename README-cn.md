@@ -23,10 +23,12 @@ Step 2. Add the dependency
 >  compile 'com.github.luhaoaimama1:Zbanner:[Latest release](https://github.com/luhaoaimama1/Zbanner/releases)'
 
 # Preview
-### incatorshape:
-![](./demo/shape.gif)
-### movemode:
-![](./demo/move.gif)
+<!--### incatorshape:-->
+<!--![](./demo/shape.gif)-->
+<!--### movemode:-->
+<!--![](./demo/move.gif)-->
+
+![](https://ws2.sinaimg.cn/large/006tNc79gy1g5lf35b8prg307i0dcu10.gif)
 
 # Easy use:
 1.banner的初始化使用 PagerAdapterCycle  PagerAdapterCircle_Image则是继承PagerAdapterCycle子view仅仅是ImageView
