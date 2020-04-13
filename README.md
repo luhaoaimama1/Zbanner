@@ -24,7 +24,9 @@ Step 2. Add the dependency
 
 # Preview
 
-![](https://tva1.sinaimg.cn/large/007S8ZIlgy1gdsbcae6iog30780egqvb.gif)
+![](http://tva1.sinaimg.cn/large/007S8ZIlgy1gdsbcae6iog30780egqvb.gif)
+
+video preview address：https://github.com/luhaoaimama1/VideoDemo/blob/master/zbanner_demo_gif.mp4
 
 # Easy use:
 1.Banner initialization of the use of pageradaptercircle_image pageradaptercycle is to inherit the view child pageradaptercycle is just ImageView 

@@ -24,7 +24,9 @@ Step 2. Add the dependency
 
 # Preview
 
-![](https://tva1.sinaimg.cn/large/007S8ZIlgy1gdsbcae6iog30780egqvb.gif)
+![](http://tva1.sinaimg.cn/large/007S8ZIlgy1gdsbcae6iog30780egqvb.gif)
+
+视频预览：https://github.com/luhaoaimama1/VideoDemo/blob/master/zbanner_demo_gif.mp4
 
 # Easy use:
 1.banner的初始化使用 PagerAdapterCycle  PagerAdapterCircle_Image则是继承PagerAdapterCycle子view仅仅是ImageView
