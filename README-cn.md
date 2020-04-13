@@ -26,6 +26,8 @@ Step 2. Add the dependency
 
 ![](http://tva1.sinaimg.cn/large/007S8ZIlgy1gdsbcae6iog30780egqvb.gif)
 
+图片预览：http://tva1.sinaimg.cn/large/007S8ZIlgy1gdsbcae6iog30780egqvb.gif
+
 视频预览：https://github.com/luhaoaimama1/VideoDemo/blob/master/zbanner_demo_gif.mp4
 
 # Easy use:
